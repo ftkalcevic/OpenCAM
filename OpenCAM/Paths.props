@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <OpenCascadePath>D:\Projects\OpenCASCADE-7.4.0-vc14-64\opencascade-7.4.0</OpenCascadePath>
+    <TbbPath>D:\Projects\OpenCASCADE-7.4.0-vc14-64\tbb_2017.0.100</TbbPath>
+    <ffmpegPath>D:\Projects\OpenCASCADE-7.4.0-vc14-64\ffmpeg-3.3.4-64</ffmpegPath>
+    <FreeImagePath>D:\Projects\OpenCASCADE-7.4.0-vc14-64\freeimage-3.17.0-vc14-64</FreeImagePath>
+    <FreeTypePath>D:\Projects\OpenCASCADE-7.4.0-vc14-64\freetype-2.5.5-vc14-64</FreeTypePath>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemDefinitionGroup />
+  <ItemGroup>
+    <BuildMacro Include="OpenCascadePath">
+      <Value>$(OpenCascadePath)</Value>
+    </BuildMacro>
+    <BuildMacro Include="TbbPath">
+      <Value>$(TbbPath)</Value>
+    </BuildMacro>
+    <BuildMacro Include="ffmpegPath">
+      <Value>$(ffmpegPath)</Value>
+    </BuildMacro>
+    <BuildMacro Include="FreeImagePath">
+      <Value>$(FreeImagePath)</Value>
+    </BuildMacro>
+    <BuildMacro Include="FreeTypePath">
+      <Value>$(FreeTypePath)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>
