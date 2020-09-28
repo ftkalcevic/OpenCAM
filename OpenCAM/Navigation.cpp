@@ -293,6 +293,10 @@ void Navigation::DragEvent(const int x, const int y, const int TheState)
 
 	if (TheState == 1)
 	{
+		if (theButtonDownX > x && theButtonDownY > y)
+			myContext->MainSelector()->AllowOverlapDetection(true);		// rectangle from bottom right corner is overlap select
+		else
+			myContext->MainSelector()->AllowOverlapDetection(false);
 		myContext->Select(theButtonDownX, theButtonDownY, x, y, myView, Standard_True);
 		emit selectionChanged();
 	}

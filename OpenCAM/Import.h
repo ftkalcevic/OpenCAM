@@ -20,12 +20,12 @@ public:
 	Import(QObject*);
 	~Import();
 
-	Handle(TopTools_HSequenceOfShape)		importModel();
+	Handle(TopTools_HSequenceOfShape) importModel();
+	Handle(TopTools_HSequenceOfShape) importModel(const int, const QString&);
 
 	QString									info() const;
 
 protected:
-	virtual Handle(TopTools_HSequenceOfShape) importModel(const int, const QString&);
 	virtual bool                              displayShSequence(const Handle(AIS_InteractiveContext)&,
 																const Handle(TopTools_HSequenceOfShape)&);
 	QString                                   selectFileName(int &);

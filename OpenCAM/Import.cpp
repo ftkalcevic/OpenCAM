@@ -1,15 +1,10 @@
 #include "stdafx.h"
 
 #include "Import.h"
+#include "ImportDlg.h"
 
 #include <Standard_WarningsDisable.hxx>
 #include <QDir>
-#include <QLayout>
-#include <QComboBox>
-#include <QGroupBox>
-#include <QList>
-#include <QListView>
-#include <QFileDialog>
 #include <QApplication>
 #include <QWidget>
 #include <QStyleFactory>
@@ -49,112 +44,7 @@
 #include <Standard_ErrorHandler.hxx>
 #include <Standard_CString.hxx>
 
-// ---------------------------- ImportDlg -----------------------------------------
 
-class ImportDlg : public QFileDialog
-{
-public:
-	ImportDlg(QWidget* = 0, Qt::WindowFlags flags = 0, bool = true);
-	~ImportDlg();
-	int                   getMode() const;
-	void                  setMode(const int);
-	void                  addMode(const int, const QString&);
-	void                  clear();
-
-protected:
-	void                  showEvent(QShowEvent* event);
-
-private:
-	QListView* findListView(const QObjectList&);
-
-private:
-	QComboBox* myBox;
-	QList<int>            myList;
-};
-
-ImportDlg::ImportDlg(QWidget* parent, Qt::WindowFlags flags, bool modal)
-	: QFileDialog(parent, flags)
-{
-	setOption(QFileDialog::DontUseNativeDialog);
-	setModal(modal);
-
-	QGridLayout* grid = ::qobject_cast<QGridLayout*>(layout());
-
-	if (grid)
-	{
-		QVBoxLayout* vbox = new QVBoxLayout;
-
-		QWidget* paramGroup = new QWidget(this);
-		paramGroup->setLayout(vbox);
-
-		myBox = new QComboBox(paramGroup);
-		vbox->addWidget(myBox);
-
-		int row = grid->rowCount();
-		grid->addWidget(paramGroup, row, 1, 1, 3); // make combobox occupy 1 row and 3 columns starting from 1
-	}
-}
-
-ImportDlg::~ImportDlg()
-{
-}
-
-int ImportDlg::getMode() const
-{
-	if (myBox->currentIndex() < 0 || myBox->currentIndex() > (int)myList.count() - 1)
-		return -1;
-	else
-		return myList.at(myBox->currentIndex());
-}
-
-void ImportDlg::setMode(const int mode)
-{
-	int idx = myList.indexOf(mode);
-	if (idx >= 0)
-		myBox->setCurrentIndex(idx);
-}
-
-void ImportDlg::addMode(const int mode, const QString& name)
-{
-	myBox->show();
-	myBox->addItem(name);
-	myList.append(mode);
-	myBox->updateGeometry();
-	updateGeometry();
-}
-
-void ImportDlg::clear()
-{
-	myList.clear();
-	myBox->clear();
-	myBox->hide();
-	myBox->updateGeometry();
-	updateGeometry();
-}
-
-QListView* ImportDlg::findListView(const QObjectList& childList)
-{
-	QListView* listView = 0;
-	for (int i = 0, n = childList.count(); i < n && !listView; i++)
-	{
-		listView = qobject_cast<QListView*>(childList.at(i));
-		if (!listView && childList.at(i))
-		{
-			listView = findListView(childList.at(i)->children());
-		}
-	}
-	return listView;
-}
-
-void ImportDlg::showEvent(QShowEvent* event)
-{
-	QFileDialog::showEvent(event);
-	QListView* aListView = findListView(children());
-	aListView->setViewMode(QListView::ListMode);
-}
-
-
-// ---------------------------- Import -----------------------------------------
 
 Import::Import(QObject* parent)
 	: QObject(parent),

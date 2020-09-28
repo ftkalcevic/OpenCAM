@@ -64,7 +64,28 @@
     <ClCompile Include="Navigation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AlibreClassicNavigation.cpp">
+    <ClCompile Include="ImportDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OperationProfile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Operation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NavigationAlibreClassic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Shape.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeSolid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeFace.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeEdge.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -81,7 +102,28 @@
     <QtMoc Include="Navigation.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="AlibreClassicNavigation.h">
+    <QtMoc Include="ImportDlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="OperationProfile.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Operation.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="NavigationAlibreClassic.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Shape.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ShapeFace.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ShapeSolid.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ShapeEdge.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -94,5 +136,10 @@
     <ClInclude Include="OcctWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="OperationProfile.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
 </Project>

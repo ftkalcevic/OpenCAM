@@ -2,13 +2,13 @@
 
 #include "Navigation.h"
 
-class AlibreClassicNavigation : public Navigation
+class NavigationAlibreClassic : public Navigation
 {
 	Q_OBJECT
 
 public:
-	AlibreClassicNavigation(QWidget* parent, Handle(AIS_InteractiveContext) theContext, Handle(V3d_View) theView);
-	~AlibreClassicNavigation();
+	NavigationAlibreClassic(QWidget* parent, Handle(AIS_InteractiveContext) theContext, Handle(V3d_View) theView);
+	~NavigationAlibreClassic();
 
 	virtual void mousePressEvent(QMouseEvent* e);
 	virtual void mouseReleaseEvent(QMouseEvent* e);

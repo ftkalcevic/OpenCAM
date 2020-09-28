@@ -1,13 +1,13 @@
-#include "AlibreClassicNavigation.h"
+#include "NavigationAlibreClassic.h"
 
 #include <QDebug>
 
-AlibreClassicNavigation::AlibreClassicNavigation(QWidget* parent, Handle(AIS_InteractiveContext) theContext, Handle(V3d_View) theView)
+NavigationAlibreClassic::NavigationAlibreClassic(QWidget* parent, Handle(AIS_InteractiveContext) theContext, Handle(V3d_View) theView)
 	: Navigation(parent, theContext, theView)
 {
 }
 
-AlibreClassicNavigation::~AlibreClassicNavigation()
+NavigationAlibreClassic::~NavigationAlibreClassic()
 {
 }
 
@@ -19,7 +19,7 @@ AlibreClassicNavigation::~AlibreClassicNavigation()
 
 
 
-void AlibreClassicNavigation::mousePressEvent(QMouseEvent* e)
+void NavigationAlibreClassic::mousePressEvent(QMouseEvent* e)
 {
 	qDebug() << e->buttons();
 	if (e->button() & Qt::LeftButton)
@@ -30,7 +30,7 @@ void AlibreClassicNavigation::mousePressEvent(QMouseEvent* e)
 		onRButtonDown(e->buttons(), e->modifiers(), e->pos());
 }
 
-void AlibreClassicNavigation::mouseReleaseEvent(QMouseEvent* e)
+void NavigationAlibreClassic::mouseReleaseEvent(QMouseEvent* e)
 {
 	if (e->button() & Qt::LeftButton)
 		onLButtonUp(e->buttons(), e->modifiers(), e->pos());
@@ -40,12 +40,12 @@ void AlibreClassicNavigation::mouseReleaseEvent(QMouseEvent* e)
 		onRButtonUp(e->buttons(), e->modifiers(), e->pos());
 }
 
-void AlibreClassicNavigation::mouseMoveEvent(QMouseEvent* e)
+void NavigationAlibreClassic::mouseMoveEvent(QMouseEvent* e)
 {
 	onMouseMove(e->buttons(), e->modifiers(), e->pos());
 }
 
-void AlibreClassicNavigation::wheelEvent(QWheelEvent* e)
+void NavigationAlibreClassic::wheelEvent(QWheelEvent* e)
 {
 	const double ANGLE_SCALE = 10;
 	myView->StartZoomAtPoint(e->pos().x(), e->pos().y());
@@ -53,7 +53,7 @@ void AlibreClassicNavigation::wheelEvent(QWheelEvent* e)
 }
 
 
-void AlibreClassicNavigation::onLButtonDown(Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, const QPoint point)
+void NavigationAlibreClassic::onLButtonDown(Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, const QPoint point)
 {
 	//  save the current mouse coordinate in min
 	myXmin = point.x();
@@ -64,6 +64,7 @@ void AlibreClassicNavigation::onLButtonDown(Qt::MouseButtons buttons, Qt::Keyboa
 	if ((buttons & (Qt::RightButton| Qt::LeftButton)) == (Qt::RightButton | Qt::LeftButton) && modifiers == 0 )
 	{
 		myCurrentMode = CurAction3d_DynamicRotation;
+		myView->StartRotation(point.x(), point.y());
 	}
 	else
 	{
@@ -99,17 +100,18 @@ void AlibreClassicNavigation::onLButtonDown(Qt::MouseButtons buttons, Qt::Keyboa
 	emit activateCursor(myCurrentMode);
 }
 
-void AlibreClassicNavigation::onMButtonDown(Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, const QPoint point)
+void NavigationAlibreClassic::onMButtonDown(Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, const QPoint point)
 {
 	myCurrentMode = CurAction3d_DynamicPanning;
 	emit activateCursor(myCurrentMode);
 }
 
-void AlibreClassicNavigation::onRButtonDown(Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, const QPoint point)
+void NavigationAlibreClassic::onRButtonDown(Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, const QPoint point)
 {
 	if ((buttons & (Qt::RightButton | Qt::LeftButton)) == (Qt::RightButton | Qt::LeftButton) && modifiers == 0)
 	{
 		myCurrentMode = CurAction3d_DynamicRotation;
+		myView->StartRotation(point.x(), point.y());
 	}
 	else
 	{
@@ -120,7 +122,7 @@ void AlibreClassicNavigation::onRButtonDown(Qt::MouseButtons buttons, Qt::Keyboa
 }
 
 
-void AlibreClassicNavigation::onLButtonUp(Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, const QPoint point)
+void NavigationAlibreClassic::onLButtonUp(Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, const QPoint point)
 {
 	switch (myCurrentMode)
 	{
@@ -181,13 +183,13 @@ void AlibreClassicNavigation::onLButtonUp(Qt::MouseButtons buttons, Qt::Keyboard
 	//ApplicationCommonWindow::getApplication()->onSelectionChanged();
 }
 
-void AlibreClassicNavigation::onMButtonUp(Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, const QPoint point)
+void NavigationAlibreClassic::onMButtonUp(Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, const QPoint point)
 {
 	myCurrentMode = CurAction3d_Nothing;
 	emit activateCursor(myCurrentMode);
 }
 
-void AlibreClassicNavigation::onRButtonUp(Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, const QPoint point)
+void NavigationAlibreClassic::onRButtonUp(Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, const QPoint point)
 {
 	if (myCurrentMode == CurAction3d_Nothing)
 	{

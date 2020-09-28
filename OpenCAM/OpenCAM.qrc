@@ -1,4 +1,5 @@
 <RCC>
-    <qresource prefix="OpenCAM">
+    <qresource prefix="/ICON">
+        <file alias="VIEW_FITALL">resources/view_fitall.png</file>
     </qresource>
 </RCC>

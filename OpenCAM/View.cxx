@@ -36,7 +36,7 @@
 #include <AIS_Trihedron.hxx>
 
 // Navigation styles
-#include "AlibreClassicNavigation.h"
+#include "NavigationAlibreClassic.h"
 
 
 // the key for multi selection :
@@ -84,7 +84,7 @@ View::View(Handle(AIS_InteractiveContext) theContext, QWidget* parent)
 	setAttribute(Qt::WA_NoSystemBackground);
 	init();
 
-	navigation = new AlibreClassicNavigation(this,myContext,myView);
+	navigation = new NavigationAlibreClassic(this,myContext,myView);
 	connect(navigation,SIGNAL(activateCursor(Navigation::CurrentAction3d)), this, SLOT(activateCursor(Navigation::CurrentAction3d)));
 	connect(navigation,SIGNAL(selectionChanged()),this,SLOT(onSelectionChanged()));
 
@@ -519,14 +519,13 @@ void View::initViewActions()
 		return;
 
 	myViewActions = new QList<QAction*>();
-	//QString dir = ApplicationCommonWindow::getResourceDir() + QString( "/" );
-	//QAction* a;
+	QAction* a;
 
-	//a = new QAction( QPixmap( dir+QObject::tr("ICON_VIEW_FITALL") ), QObject::tr("MNU_FITALL"), this );
-	//a->setToolTip( QObject::tr("TBR_FITALL") );
-	//a->setStatusTip( QObject::tr("TBR_FITALL") );
-	//connect( a, SIGNAL( triggered() ) , this, SLOT( fitAll() ) );
-	//myViewActions->insert(ViewFitAllId, a);
+	a = new QAction( QPixmap( ":/ICON/VIEW_FITALL" ), QObject::tr("&Fit All"), this );
+	a->setToolTip( QObject::tr("Zoom Fit All") );
+	a->setStatusTip( QObject::tr("Zoom Fit All") );
+	connect( a, SIGNAL( triggered() ) , this, SLOT( fitAll() ) );
+	myViewActions->insert(ViewFitAllId, a);
 
 	//a = new QAction( QPixmap( dir+QObject::tr("ICON_VIEW_FITAREA") ), QObject::tr("MNU_FITAREA"), this );
 	//a->setToolTip( QObject::tr("TBR_FITAREA") );
@@ -790,20 +789,20 @@ void View::addItemInPopup(QMenu* /*theMenu*/)
 
 void View::noActiveActions()
 {
-	//for ( int i = ViewFitAllId; i < ViewHlrOffId ; i++ )
-	//{
-	//    QAction* anAction = myViewActions->at( i );
-	//    if( ( anAction == myViewActions->at( ViewFitAreaId ) ) ||
-	//        ( anAction == myViewActions->at( ViewZoomId ) ) ||
-	//        ( anAction == myViewActions->at( ViewPanId ) ) ||
-	//        ( anAction == myViewActions->at( ViewGlobalPanId ) ) ||
-	//        ( anAction == myViewActions->at( ViewRotationId ) ) )
-	//    {
-	//        setCursor( *defCursor );
-	//        anAction->setCheckable( true );
-	//        anAction->setChecked( false );
-	//    }
-	//}
+	for ( int i = ViewFitAllId; i < ViewHlrOffId ; i++ )
+	{
+	    QAction* anAction = myViewActions->at( i );
+	    if( ( anAction == myViewActions->at( ViewFitAreaId ) ) ||
+	        ( anAction == myViewActions->at( ViewZoomId ) ) ||
+	        ( anAction == myViewActions->at( ViewPanId ) ) ||
+	        ( anAction == myViewActions->at( ViewGlobalPanId ) ) ||
+	        ( anAction == myViewActions->at( ViewRotationId ) ) )
+	    {
+	        setCursor( *defCursor );
+	        anAction->setCheckable( true );
+	        anAction->setChecked( false );
+	    }
+	}
 }
 
 void View::onBackground()

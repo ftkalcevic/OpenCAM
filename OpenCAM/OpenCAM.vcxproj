@@ -116,10 +116,17 @@
     </QtMoc>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AlibreClassicNavigation.cpp" />
+    <ClCompile Include="NavigationAlibreClassic.cpp" />
     <ClCompile Include="Import.cpp" />
+    <ClCompile Include="ImportDlg.cpp" />
     <ClCompile Include="Navigation.cpp" />
     <ClCompile Include="OcctWindow.cxx" />
+    <ClCompile Include="Operation.cpp" />
+    <ClCompile Include="OperationProfile.cpp" />
+    <ClCompile Include="Shape.cpp" />
+    <ClCompile Include="ShapeEdge.cpp" />
+    <ClCompile Include="ShapeFace.cpp" />
+    <ClCompile Include="ShapeSolid.cpp" />
     <ClCompile Include="View.cxx" />
     <QtMoc Include="View.h" />
     <QtMoc Include="Import.h" />
@@ -129,8 +136,15 @@
     <ClCompile Include="main.cpp" />
     <QtMoc Include="PartView.h" />
     <QtMoc Include="Navigation.h" />
-    <QtMoc Include="AlibreClassicNavigation.h" />
+    <QtMoc Include="NavigationAlibreClassic.h" />
+    <QtMoc Include="ImportDlg.h" />
     <ClInclude Include="OcctWindow.h" />
+    <QtMoc Include="OperationProfile.h" />
+    <QtMoc Include="Operation.h" />
+    <QtMoc Include="Shape.h" />
+    <QtMoc Include="ShapeEdge.h" />
+    <QtMoc Include="ShapeFace.h" />
+    <QtMoc Include="ShapeSolid.h" />
     <ClInclude Include="stdafx.h" />
     <ClCompile Include="PartView.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -140,6 +154,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="opencam_en.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="OperationProfile.ui" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
